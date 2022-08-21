@@ -1,32 +1,43 @@
-# Prerequisites
-*.d
+**************SETUP CODE**************/
+const int LeftMotorForward = 27;
+const int LeftMotorBackward = 26;
+const int RightMotorForward = 16;
+const int RightMotorBackward = 17;
+const int enA=14;
+const int enB=25;
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+const int trigPin =33;
+const int echoPin =32;
 
-# Precompiled Headers
-*.gch
-*.pch
+int Distance[6];
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
 
-# Fortran module files
-*.mod
-*.smod
+void setup()
+{
+  Serial.begin(9600);
+  // Set L298N Control Pins as Output
+  pinMode(RightMotorForward, OUTPUT);
+  pinMode(LeftMotorForward, OUTPUT);
+  pinMode(LeftMotorBackward, OUTPUT);
+  pinMode(RightMotorBackward, OUTPUT);
+  pinMode(trigPin,OUTPUT);
+  pinMode(echoPin,INPUT);
+}
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
-# Executables
-*.exe
-*.out
-*.app
+/***************MAIN LOOP****************/
+void loop() {
+  moveForward();
+  delay(30000);
+  stop();
+  delay(1000000);
+
+}
+
+void turnRight()      // Turn Right Function for Motor Driver.
+{
+  digitalWrite(RightMotorForward, LOW);
+  digitalWrite(RightMotorBackward, HIGH);
+  digitalWrite(LeftMotorForward, HIGH);
+  digitalWrite(LeftMotorBackward, LOW);
+}
